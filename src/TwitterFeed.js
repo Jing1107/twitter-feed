@@ -13,7 +13,7 @@ class TwitterFeed extends Component {
         this.props.tweets.subscribeToMore({
             document: NEW_TWEET_SUBSCRIPTION,
             updateQuery: (prevData, { subscriptionData }) => {
-                if (!subscriptionData) {
+                if (!subscriptionData.data) {
                     return prevData;
                 }
                 const newTweetItem = subscriptionData.data.Tweet.node;
@@ -24,7 +24,7 @@ class TwitterFeed extends Component {
             }
         });
     }
-    
+
     handleSubmitSuccess = async () => {
         this.props.tweets.refetch()
     }
